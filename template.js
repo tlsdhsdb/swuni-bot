@@ -35,17 +35,15 @@ var noticeTemp = {
         }
       ]
     }
-  }
+};
 
 const returnNotice = function(data,url){
     var notice = noticeTemp;
-    
-    notice.template.outputs[0].listCard.header = data[0]['classification'];
+    notice.template.outputs[0].listCard.header = {title:data[0]['classification']};
     for(var i=0;i<5;i++){
-        notice.template.outputs[0].listCard.items[i] = data[i]['des']
+        notice.template.outputs[0].listCard.items[i] = { title: data[i]['des']}
     }
     notice.template.outputs[0].listCard.buttons[0].webLinkUrl= url;
-    //console.log(notice)
     return notice ;
 }
 
