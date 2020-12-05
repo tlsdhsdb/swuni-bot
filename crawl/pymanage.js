@@ -20,8 +20,16 @@ var options = {
 };
 
 
-PythonShell.PythonShell.run('crawl.py', options, function (err, results) {
+var dbUpdate = function(){
 
-  console.log("python run!")
+  PythonShell.PythonShell.run('crawl.py', options, function (err, results) {
 
-});
+    console.log("python run!")
+  
+  });
+
+}
+
+
+
+module.exports = dbUpdate;

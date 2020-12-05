@@ -5,14 +5,16 @@ var router = express.Router();
 const noticeIdx = ["학사","장학","행사","채용/취업","일반/봉사"]
 
 const returnTemplate = require('../template.js')
+const dbUpdate = require('../crawl/pymanage.js')
 
+dbUpdate();
 
 router.post('/getInfo/haksa',(req,res)=>{
         (async()=>{
                 var url = "https://www.swu.ac.kr/www/noticea.html"
 
                 var notices = await notice.find({classification:noticeIdx[0]})
-                        .sort({'updatedAt': 1})
+                        .sort({'date': -1})
                         .limit(5)
                         .exec()
                 var result = returnTemplate(notices,url);
@@ -29,7 +31,7 @@ router.post('/getInfo/janghak',(req,res)=>{
         var result = returnTemplate(notices,url)
         res.status(200).send(result)
         })
-        .sort({'updatedAt': 1})
+        .sort({'date': 1})
         .limit(5)
         
 })
@@ -42,7 +44,7 @@ router.post('/getInfo/hengsa',(req,res)=>{
         console.log(result)
         res.status(200).send(result)
         })
-        .sort({'updatedAt': 1})
+        .sort({'date': 1})
         .limit(5)
 })
 
@@ -53,7 +55,7 @@ router.post('/getInfo/cheyong',(req,res)=>{
         var result = returnTemplate(notices,url)
         res.status(200).send(result)
         })
-        .sort({'updatedAt': 1})
+        .sort({'date': 1})
         .limit(5)
 })
 
@@ -64,7 +66,7 @@ router.post('/getInfo/bongsa',(req,res)=>{
         var result = returnTemplate(notices,url)
         res.status(200).send(result)
         })
-        .sort({'updatedAt': 1})
+        .sort({'date': 1})
         .limit(5)
 
 })
